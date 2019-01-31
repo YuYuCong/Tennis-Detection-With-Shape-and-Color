@@ -1,15 +1,15 @@
 #include"include_all.h"
 
 /**
- * @function polar_buff
+ * @function filter
  * @author Sunnie CYQ
- * @brief å°†æåæ ‡è½¬åŒ–ä¸ºbuffæ•°ç»„
+ * @brief ½«¼«×ø±ê×ª»¯ÎªbuffÊı×é
  */
 
 void polar_buff( bool tennis, unsigned char (&send_buf)[10], double s, double theta )
 {
-	char scc[5] = "0000";       //4ä½æœ‰æ•ˆæ•°å­—
-	char thetacc[4] = "000";    //3ä½æœ‰æ•ˆæ•°å­—
+	char scc[5] = "0000";       //4Î»ÓĞĞ§Êı×Ö
+	char thetacc[4] = "000";    //3Î»ÓĞĞ§Êı×Ö
 	char sc[5] = "0000";
 	char thetac[4] = "000";
 
@@ -28,7 +28,7 @@ void polar_buff( bool tennis, unsigned char (&send_buf)[10], double s, double th
 	cout << "end" << endl;*/
 
 	/************************ DISTANCE ***********************/
-	if (!int(s))   //ä¸‹ä½æœºé»˜è®¤ä½ç§»çš„ç¬¬ä¸€ä½ä¸ºä¸ªä½
+	if (!int(s))   //ÏÂÎ»»úÄ¬ÈÏÎ»ÒÆµÄµÚÒ»Î»Îª¸öÎ»
 	{
 		for (int i = 1; i < 5; i++)
 		{
@@ -38,7 +38,7 @@ void polar_buff( bool tennis, unsigned char (&send_buf)[10], double s, double th
 				break;
 		}
 	}
-	else    //10mä»¥å†…
+	else    //10mÒÔÄÚ
 	{
 		for (int i = 0; i < 5; i++)
 		{
@@ -48,17 +48,17 @@ void polar_buff( bool tennis, unsigned char (&send_buf)[10], double s, double th
 	}
 
 	/**************************** ANGLE ***************************/
-	if (theta < 0)   //0æ­£1è´Ÿ
+	if (theta < 0)   //0Õı1¸º
 	{
-		thetac[0] = '1';  //ç¬¬ä¸€ä½æ˜¯ç¬¦å·ä½
+		thetac[0] = '1';  //µÚÒ»Î»ÊÇ·ûºÅÎ»
 
-		if (!int(theta * 180 / pii)) {}   //ä¸ç”¨æ—‹è½¬
-		else if (!int(theta * 180 / pii / 10))        //æ—‹è½¬10åº¦ä»¥å†…ï¼Œä¸‹ä½æœºé»˜è®¤ç¬¬äºŒä½ä¸ºåä½
+		if (!int(theta * 180 / pii)) {}   //²»ÓÃĞı×ª
+		else if (!int(theta * 180 / pii / 10))        //Ğı×ª10¶ÈÒÔÄÚ£¬ÏÂÎ»»úÄ¬ÈÏµÚ¶şÎ»ÎªÊ®Î»
 		{
 			//thetac[1] = '0';
 			thetac[2] = thetacc[1];
 		}
-		else   //æ—‹è½¬åº¦æ•°ä¸ºä¸¤ä½æ•°
+		else   //Ğı×ª¶ÈÊıÎªÁ½Î»Êı
 		{
 			thetac[1] = thetacc[1];
 			thetac[2] = thetacc[2];
@@ -67,20 +67,20 @@ void polar_buff( bool tennis, unsigned char (&send_buf)[10], double s, double th
 	else
 	{
 		//thetac[0] = '0';
-		if (!int(theta * 180 / pii)) {}   //ä¸ç”¨æ—‹è½¬
-		else if (!int(theta * 180 / pii / 10))        //æ—‹è½¬10åº¦ä»¥å†…ï¼Œä¸‹ä½æœºé»˜è®¤ç¬¬äºŒä½ä¸ºåä½
+		if (!int(theta * 180 / pii)) {}   //²»ÓÃĞı×ª
+		else if (!int(theta * 180 / pii / 10))        //Ğı×ª10¶ÈÒÔÄÚ£¬ÏÂÎ»»úÄ¬ÈÏµÚ¶şÎ»ÎªÊ®Î»
 		{
 			//thetac[1] = '0';
 			thetac[2] = thetacc[0];
 		}
-		else   //æ—‹è½¬åº¦æ•°ä¸ºä¸¤ä½æ•°
+		else   //Ğı×ª¶ÈÊıÎªÁ½Î»Êı
 		{
 			thetac[1] = thetacc[0];
 			thetac[2] = thetacc[1];
 		}
 	}
-	//cout << "sçš„å­—ç¬¦=" << sc << endl;
-	//cout << "thetaçš„å­—ç¬¦=" << thetac << endl;
+	//cout << "sµÄ×Ö·û=" << sc << endl;
+	//cout << "thetaµÄ×Ö·û=" << thetac << endl;
 
 
 	/**************************** SEND BUFF ***************************/
@@ -96,13 +96,13 @@ void polar_buff( bool tennis, unsigned char (&send_buf)[10], double s, double th
 	send_buf[8] = thetac[3];
 	//send_buf[8] = '\n';
 	send_buf[9] = '\r';
-	//WHYä»ç¬¬ä¸€ä¸ªéé›¶ä½å¼€å§‹æ”¶.....èœœæ±ä¸‹ä½æœº
+	//WHY´ÓµÚÒ»¸ö·ÇÁãÎ»¿ªÊ¼ÊÕ.....ÃÛÖ­ÏÂÎ»»ú
 	send_buf[0] = '1';
 	cout << "buff=" << send_buf << endl;
 
 	if (!tennis)
 	{
-		send_buf[0] = '1';     //æ— æ„ä¹‰ï¼Œé0å³å¯ï¼Œæ•…ä»…10mä»¥å†…
+		send_buf[0] = '1';     //ÎŞÒâÒå£¬·Ç0¼´¿É£¬¹Ê½ö10mÒÔÄÚ
 		//send_buf[0] = '0';
 		send_buf[1] = '0';
 		send_buf[2] = '0';

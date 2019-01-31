@@ -1,11 +1,11 @@
 //INCLUDE
-#include"../include/fitellipse.h"
+#include"fitellipse.h"
 
 
 /**
  * @function fitellipse
  * @author Sunnie CYQ
- * @brief æ¤­åœ†æ‹Ÿåˆ
+ * @brief ÍÖÔ²ÄâºÏ
  */
 
 void _fitellipse( cv::Mat &filter,int &x, int &radius )
@@ -111,7 +111,7 @@ void _fitellipse( cv::Mat &filter,int &x, int &radius )
 			
 		}
 		
-		//ç»˜åˆ¶æ‹Ÿåˆç‚¹
+		//»æÖÆÄâºÏµã
 		paper.drawPoints(pts, cv::Scalar(255, 255, 255));
 	}
 	cv::namedWindow("fitellipse", cv::WINDOW_KEEPRATIO);

@@ -6,11 +6,11 @@
 
 /// Function Declarations
 /***************************** FILTER ********************************/
-void filterDE(cv::Mat &gray, int Ksize = 15);     //å¼€é—­è¿ç®—
-void filterBLUR(cv::Mat &gray, int Ksize = 20);    //å‡å€¼æ»¤æ³¢
-void filterGAUSS(cv::Mat &gray, int Ksize = 7);    //é«˜æ–¯æ»¤æ³¢
-void filterMEDIAN(cv::Mat &gray, int Ksize = 5);    //ä¸­å€¼æ»¤æ³¢
-void filterBILAT(cv::Mat &src, cv::Mat &gray);    //åŒè¾¹æ»¤æ³¢
+void filterDE(cv::Mat &gray, int Ksize = 15);     //¿ª±ÕÔËËã
+void filterBLUR(cv::Mat &gray, int Ksize = 20);    //¾ùÖµÂË²¨
+void filterGAUSS(cv::Mat &gray, int Ksize = 7);    //¸ßË¹ÂË²¨
+void filterMEDIAN(cv::Mat &gray, int Ksize = 5);    //ÖĞÖµÂË²¨
+void filterBILAT(cv::Mat &src, cv::Mat &gray);    //Ë«±ßÂË²¨
 
 /************************** COORDINATE TRANS **************************/
 void cartesian_to_polar(double x, int radius, double centre_x, double &s , double &theta );

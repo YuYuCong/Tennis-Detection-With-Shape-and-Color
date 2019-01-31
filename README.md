@@ -1,14 +1,8 @@
 [TOC]
 
+# 基于轮廓检测
 
-
-# 网球检测
-
-### 1. Description
-
-#### 1.1 基于轮廓检测
-
-##### HoughCircles
+## HoughCircles
 
 若使用霍夫圆检测，在main函数中设置 
 
@@ -18,7 +12,7 @@ bool HOUGH = true；
 
 DRAWBACKS: 霍夫圆检测的精确度和灵敏度很难在同一个参数下保证
 
-##### FitEllipse
+## FitEllipse
 
 若使用椭圆拟合，在fitellipse.h中设置
 
@@ -38,9 +32,9 @@ const bool fitEllipseDirectQ = false;
 
 DRAWBACKS: 对小圆的检测灵敏度不如houghcircles
 
-#### 1.2 基于颜色检测
+# 基于颜色检测
 
-##### BGR with SVM
+## BGR with SVM
 
 若使用SVM，在main函数中设置
 
@@ -52,13 +46,13 @@ DRAWBACKS: windows上的预测每帧1s左右
 
 因为目前后续检测都是基于轮廓的，所以颜色分离后再检测效果挺不理想的诶。。。
 
-##### HSV
+## HSV
 
 若使用HSV模型
 
 我还没写好......
 
-#### 1.3 串口通信协议
+# 串口通信协议
 
 发送的字符共10位
 
@@ -69,22 +63,3 @@ DRAWBACKS: windows上的预测每帧1s左右
 其中符号位0负1正，以逆时针方向为正方向
 
 后两位：‘\0’ '\r'
-
-
-
-### 2. Usage
-
-Compile
-
-```shell
-$ mkdir build
-$ cd build
-$ cmake ..
-$ make
-```
-
-Launch
-
-```shell
-$ ./bin/tennisbyCYQ
-```

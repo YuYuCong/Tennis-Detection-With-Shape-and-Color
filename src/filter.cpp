@@ -1,14 +1,14 @@
-#include"../include/include_all.h"
+#include"include_all.h"
 
 /**
  * @function filter
  * @author Sunnie CYQ
- * @brief  Ksizeæ ¸å¤§å°ä¸ºæ®æ ·æœ¬æµ‹è¯•æ‰€å¾—ç»éªŒå€¼
- *         æ»¤æ³¢å’Œksizeçš„é€‰æ‹©éå¸¸å½±å“éœå¤«åœ†çš„æ£€æµ‹ï¼ŒçŒœæµ‹æ˜¯å› ä¸ºéœå¤«åœ†ä¾é è½®å»“è¿›è¡Œåœ†æ£€æµ‹ï¼Œ
-           æ•…ä¸èƒ½æŸå¤±å¤ªå¤šè½®å»“ä¿¡æ¯ï¼Œè¿˜éœ€ä»”ç»†ç ”ç©¶houghcirclesæºç 
+ * @brief  KsizeºË´óĞ¡Îª¾İÑù±¾²âÊÔËùµÃ¾­ÑéÖµ
+ *         ÂË²¨ºÍksizeµÄÑ¡Ôñ·Ç³£Ó°Ïì»ô·òÔ²µÄ¼ì²â£¬²Â²âÊÇÒòÎª»ô·òÔ²ÒÀ¿¿ÂÖÀª½øĞĞÔ²¼ì²â£¬
+           ¹Ê²»ÄÜËğÊ§Ì«¶àÂÖÀªĞÅÏ¢£¬»¹Ğè×ĞÏ¸ÑĞ¾¿houghcirclesÔ´Âë
  */
 
-void filterDE( cv::Mat &gray,int Ksize )      //é»˜è®¤Ksize=9
+void filterDE( cv::Mat &gray,int Ksize )      //Ä¬ÈÏKsize=9
 {
 	/******************* Dilate & Erode ******************/
 	cv::Mat g1, g2, g3;
@@ -23,19 +23,19 @@ void filterDE( cv::Mat &gray,int Ksize )      //é»˜è®¤Ksize=9
 	imshow("3", g3);*/
 }
 
-void filterBLUR( cv::Mat &gray, int Ksize )      //é»˜è®¤Ksize=20
+void filterBLUR( cv::Mat &gray, int Ksize )      //Ä¬ÈÏKsize=20
 {
 	/******************** Blur *************************/
 	blur(gray, gray, cv::Size(Ksize, Ksize), cv::Point(-1, -1));
 }
 
-void filterGAUSS( cv::Mat &gray, int Ksize )        //é»˜è®¤Ksize=7
+void filterGAUSS( cv::Mat &gray, int Ksize )        //Ä¬ÈÏKsize=7
 {
 	/****************** GaussianBlur ********************/
 	GaussianBlur(gray, gray, cv::Size(Ksize, Ksize), 0, 0);  
 }
 
-void filterMEDIAN( cv::Mat &gray, int Ksize )            //é»˜è®¤Ksize=5
+void filterMEDIAN( cv::Mat &gray, int Ksize )            //Ä¬ÈÏKsize=5
 {
 	/******************* MedianBlur *********************/
 	medianBlur(gray, gray, Ksize);

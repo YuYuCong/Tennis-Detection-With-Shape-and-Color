@@ -1,17 +1,17 @@
 #include "function_declare.h"
 #include "fitellipse.h"
 #include <math.h>
-//#include <SerialPort.h>
+#include <SerialPort.h>
 
 
 int main(int argc, const char** argv)
 {
 	cv::Mat srcImage;
-	bool tennis = false;  //é»˜è®¤æœªæ£€æµ‹åˆ°ç½‘çƒ
-    
+	bool tennis = false;  //Ä¬ÈÏÎ´¼ì²âµ½ÍøÇò
+	
 	/************choose methods***********/
-	bool HOUGH = 1;
-	bool SVM = 0;
+	bool HOUGH = false;
+	bool SVM = true;
 	if (HOUGH)
 	{
 		cout << "Using HoughCircle!" << endl;
@@ -20,36 +20,34 @@ int main(int argc, const char** argv)
 	{
 		cout << "Using SVM!" << endl;
 	}
-
 	if (fitEllipseQ || fitEllipseAMSQ || fitEllipseDirectQ)
 	{
 		cout << "Using fitEllipse!" << endl;
 	}
 
-	// /********************************* SERIAL PORT OPEN ************************************/
-	// unsigned char send_buf[10] = "00000000";     //åˆå§‹åŒ–ä¸²å£æ•°ç»„
-	// CSerialPort mySerialPort;
-	// if (!mySerialPort.InitPort(6))               //com5ï¼Œcyqç”µè„‘å·¦è¾¹çš„ä¸²å£;com6,å³è¾¹ç¬¬ä¸‰ä¸ª
-	// {
-	// 	cout << "initPort fail !" << endl;
-	// }
-	// else
-	// {
-	// 	cout << "initPort success !" << endl;
-	// }
-	// if (!mySerialPort.OpenListenThread())
-	// {
-	// 	cout << "OpenListenThread fail !" << endl;
-	// }
-	// else
-	// {
-	// 	cout << "OpenListenThread success !" << endl;
-	// }
-
+	/********************************* SERIAL PORT OPEN ************************************/
+	unsigned char send_buf[10] = "00000000";     //³õÊ¼»¯´®¿ÚÊı×é
+	CSerialPort mySerialPort;
+	if (!mySerialPort.InitPort(6))               //com5£¬cyqµçÄÔ×ó±ßµÄ´®¿Ú;com6,ÓÒ±ßµÚÈı¸ö
+	{
+		cout << "initPort fail !" << endl;
+	}
+	else
+	{
+		cout << "initPort success !" << endl;
+	}
+	if (!mySerialPort.OpenListenThread())
+	{
+		cout << "OpenListenThread fail !" << endl;
+	}
+	else
+	{
+		cout << "OpenListenThread success !" << endl;
+	}
 	
 	/********************************** IMAGE PRE-PROCESSING *************************************/
-	//è‹¥è¯»å–å›¾ç‰‡
-	/*srcImage = cv::imread("../data/tennis1/t1346.jpg");
+	//Èô¶ÁÈ¡Í¼Æ¬
+	/*srcImage = cv::imread("./data/tennis1/t1346.jpg");
 
 	if (srcImage.empty())
 	{
@@ -59,8 +57,8 @@ int main(int argc, const char** argv)
 
 	else
 	{
-		cv::namedWindow("åŸå›¾", cv::WINDOW_KEEPRATIO);
-		imshow("åŸå›¾", srcImage);
+		cv::namedWindow("Ô­Í¼", cv::WINDOW_KEEPRATIO);
+		imshow("Ô­Í¼", srcImage);
 		
 		if (SVM)
 		{	
@@ -76,8 +74,8 @@ int main(int argc, const char** argv)
 	}*/
 	
 	
-	//è‹¥è¯»è§†é¢‘
-	cv::VideoCapture cap(0);
+	//Èô¶ÁÊÓÆµ
+	cv::VideoCapture cap(1);
 	if (!cap.isOpened())
 		cout << "error open!" << endl;
 	else
@@ -87,19 +85,19 @@ int main(int argc, const char** argv)
 		cv::Mat src;
 		srcImage.copyTo(src);
 
-		//è®¾å®šæ„Ÿå…´è¶£åŒºåŸŸ
+		//Éè¶¨¸ĞĞËÈ¤ÇøÓò
 		cv::Mat roi; 
 		int roi_x = 20;
 		int roi_y = 5;
-		int roi_width = 600;   //ä¸å¤§äº640
-		int roi_height = 470;   //ä¸å¤§äº480
+		int roi_width = 600;   //²»´óÓÚ640
+		int roi_height = 470;   //²»´óÓÚ480
 		int width = srcImage.cols;
 
 		cv::Rect rec(roi_x, roi_y, roi_width, roi_height);
 		roi = srcImage(rec);
 
 		double centre_x = width / 2 - roi_x;
-		//cout << "ROIä¸­å¿ƒ" << centre_x << endl << endl;
+		//cout << "ROIÖĞĞÄ" << centre_x << endl << endl;
 		
 
 		/************************************ SVM ****************************************/
@@ -107,46 +105,45 @@ int main(int argc, const char** argv)
 		{
 			int st1, et1;
 			st1 = cvGetTickCount();
-			//cv::waitKey(0);
 			svm_predict(roi);
 			et1 = cvGetTickCount();
 			cout << "times cost:" << (et1 - st1) / (double)cvGetTickFrequency() / 1000.0 << "milliseconds\n\n";
 		}
 
-   
+
 		/***********************************************************************************/
-		double s = 0;               //å°è½¦åº•ç›˜ä¸­å¿ƒä¸ç½‘çƒçš„è·ç¦»ï¼Œå•ä½m
-		double theta = 0;           //æœºå™¨äººæåæ ‡ç³»ä¸‹ï¼Œç½‘çƒåç¦»çš„è§’åº¦ï¼Œå·¦æ­£å³è´Ÿ
-		int radius = 0;             //ç½‘çƒåƒç´ åŠå¾„
+		double s = 0;               //Ğ¡³µµ×ÅÌÖĞĞÄÓëÍøÇòµÄ¾àÀë£¬µ¥Î»m
+		double theta = 0;           //»úÆ÷ÈË¼«×ø±êÏµÏÂ£¬ÍøÇòÆ«ÀëµÄ½Ç¶È£¬×óÕıÓÒ¸º
+		int radius = 0;             //ÍøÇòÏñËØ°ë¾¶
 		int x = 0;
 		int y = 0;
 		int rx = 0;
-		int ry = 0;                 //åŸå›¾ï¼ŒROIä¸­ç½‘çƒä¸­å¿ƒåæ ‡
+		int ry = 0;                 //Ô­Í¼£¬ROIÖĞÍøÇòÖĞĞÄ×ø±ê
 
-		int max_radius = 0;       //å‚¨å­˜ç›¸åº”çš„åŠå¾„
-		double max_r_x = centre_x;   //å‚¨å­˜ç›¸åº”çš„åæ ‡
+		int max_radius = 0;       //´¢´æÏàÓ¦µÄ°ë¾¶
+		double max_r_x = centre_x;   //´¢´æÏàÓ¦µÄ×ø±ê
 
 		/********************************** HOUGH CIRCLES ***********************************/
 		if (HOUGH)
 		{
-			//è½¬ç°åº¦å›¾ï¼Œé™å™ª
+			//×ª»Ò¶ÈÍ¼£¬½µÔë
 			cv::Mat gray;
-			cvtColor(roi, gray, cv::COLOR_BGR2GRAY); //è‹¥é€‰æ‹©åŒè¾¹æ»¤æ³¢è¦æ³¨é‡Šæ‰æ­¤è¡Œ
-			filterGAUSS(gray);        //ä¸ºæ ¹æ®åº”ç”¨åœºæ™¯é€‰æ‹©çš„filter
+			cvtColor(roi, gray, cv::COLOR_BGR2GRAY); //ÈôÑ¡ÔñË«±ßÂË²¨Òª×¢ÊÍµô´ËĞĞ
+			filterGAUSS(gray);        //Îª¸ù¾İÓ¦ÓÃ³¡¾°Ñ¡ÔñµÄfilter
 			//namedWindow("hough_filter", WINDOW_KEEPRATIO);
 			//imshow("hough_filter", gray);
 
 			vector<cv::Vec3f>circles;
 			vector<cv::Point>polar_centers;
-			HoughCircles(gray, circles, cv::HOUGH_GRADIENT, //è¾“å…¥ï¼Œè¾“å‡ºï¼Œæ–¹æ³•ï¼ˆç±»å‹ï¼‰
-				1.5, //dp(dp=1æ—¶è¡¨ç¤ºéœå¤«ç©ºé—´ä¸è¾“å…¥å›¾åƒç©ºé—´çš„å¤§å°ä¸€è‡´ï¼Œdp=2æ—¶éœå¤«ç©ºé—´æ˜¯è¾“å…¥å›¾åƒç©ºé—´çš„ä¸€åŠï¼Œä»¥æ­¤ç±»æ¨)
-				250, //æœ€çŸ­è·ç¦»-å¯ä»¥åˆ†è¾¨æ˜¯ä¸¤ä¸ªåœ†ï¼Œå¦åˆ™è®¤ä¸ºæ˜¯åŒå¿ƒåœ† ,
-				200, //è¾¹ç¼˜æ£€æµ‹æ—¶ä½¿ç”¨Cannyç®—å­çš„é«˜é˜ˆå€¼
-				40, //ä¸­å¿ƒç‚¹ç´¯åŠ å™¨é˜ˆå€¼â€”å€™é€‰åœ†å¿ƒï¼ˆéœå¤«ç©ºé—´å†…ç´¯åŠ å’Œå¤§äºè¯¥é˜ˆå€¼çš„ç‚¹å°±å¯¹åº”äºåœ†å¿ƒï¼‰ï¼Œè¶Šå°è¶Šæ•æ„Ÿï¼Œæ³¨æ„å¤ªæ•æ„Ÿä¼šå¯¼è‡´æ­»å¾ªç¯
+			HoughCircles(gray, circles, cv::HOUGH_GRADIENT, //ÊäÈë£¬Êä³ö£¬·½·¨£¨ÀàĞÍ£©
+				1.5, //dp(dp=1Ê±±íÊ¾»ô·ò¿Õ¼äÓëÊäÈëÍ¼Ïñ¿Õ¼äµÄ´óĞ¡Ò»ÖÂ£¬dp=2Ê±»ô·ò¿Õ¼äÊÇÊäÈëÍ¼Ïñ¿Õ¼äµÄÒ»°ë£¬ÒÔ´ËÀàÍÆ)
+				250, //×î¶Ì¾àÀë-¿ÉÒÔ·Ö±æÊÇÁ½¸öÔ²£¬·ñÔòÈÏÎªÊÇÍ¬ĞÄÔ² ,
+				200, //±ßÔµ¼ì²âÊ±Ê¹ÓÃCannyËã×ÓµÄ¸ßãĞÖµ
+				40, //ÖĞĞÄµãÀÛ¼ÓÆ÷ãĞÖµ¡ªºòÑ¡Ô²ĞÄ£¨»ô·ò¿Õ¼äÄÚÀÛ¼ÓºÍ´óÓÚ¸ÃãĞÖµµÄµã¾Í¶ÔÓ¦ÓÚÔ²ĞÄ£©£¬Ô½Ğ¡Ô½Ãô¸Ğ£¬×¢ÒâÌ«Ãô¸Ğ»áµ¼ÖÂËÀÑ­»·
 				0, 0);
 
 
-			//è½®è¯¢æŸ¥æ‰¾è·ç¦»æœ€è¿‘çš„ç½‘çƒ
+			//ÂÖÑ¯²éÕÒ¾àÀë×î½üµÄÍøÇò
 			for (size_t i = 0; i < circles.size(); i++)
 			{
 				rx = cvRound(circles[i][0]);
@@ -155,9 +152,9 @@ int main(int argc, const char** argv)
 				y = ry + roi_y;
 
 				radius = cvRound(circles[i][2]);
-				//cout << "åŠå¾„" << radius << endl;
+				//cout << "°ë¾¶" << radius << endl;
 
-				//[todo]åŠ ä¸€ä¸ªé¢œè‰²åˆ¤æ–­
+				//[todo]¼ÓÒ»¸öÑÕÉ«ÅĞ¶Ï
 				int B, G, R;
 				/*
 				B = (srcImage.at<Vec3b>(y, x)[0] + srcImage.at<Vec3b>(y + 5, x + 5)[0] + srcImage.at<Vec3b>(y + 5, x - 5)[0] + srcImage.at<Vec3b>(y - 5, x - 5)[0] + srcImage.at<Vec3b>(y - 5, x + 5)[0]) / 5;
@@ -170,7 +167,7 @@ int main(int argc, const char** argv)
 
 				if (radius < 60 /*&& B<maxB && B>minB && G<maxG && G>minG && R<maxR && R>minR*/)
 				{
-					tennis = true;    //æ£€æµ‹åˆ°äº†ç½‘çƒ
+					tennis = true;    //¼ì²âµ½ÁËÍøÇò
 
 					if (radius > max_radius)
 					{
@@ -179,7 +176,7 @@ int main(int argc, const char** argv)
 					}
 
 					cv::Point center(x, y);
-					//cout << "åƒç´ åæ ‡ï¼š" << center << endl << endl;
+					//cout << "ÏñËØ×ø±ê£º" << center << endl << endl;
 
 					///////////////TEST//////////////////////
 					/*B = srcImage.at<Vec3b>(y, x)[0];
@@ -188,9 +185,9 @@ int main(int argc, const char** argv)
 					cout << "B=" << B << ",G=" << G << ",R=" << R << endl;*/
 
 					circle(srcImage, center, 4, cv::Scalar(0, 255, 0), -1, 8, 0);
-					circle(srcImage, center, radius, cv::Scalar(155, 50, 255), 3, 4, 0);   //ä¸ºä»€ä¹ˆMat roié‡Œä¹Ÿè‡ªåŠ¨ç”»ä¸Šäº†ï¼Œï¼Œ
+					circle(srcImage, center, radius, cv::Scalar(155, 50, 255), 3, 4, 0);   //ÎªÊ²Ã´Mat roiÀïÒ²×Ô¶¯»­ÉÏÁË£¬£¬
 
-					//è‹¥è·¯å¾„è§„åˆ’éœ€æ‰€æœ‰ç½‘çƒåæ ‡
+					//ÈôÂ·¾¶¹æ»®ĞèËùÓĞÍøÇò×ø±ê
 					/*cartesian_to_polar(x, radius, centre_x, s, theta);
 					cv::Point polar_center(s, theta);
 					polar_centers.push_back(polar_center);*/
@@ -201,9 +198,8 @@ int main(int argc, const char** argv)
 
 
 			//cout << "maxradius=" << max_radius << endl;
-			//è‹¥è·¯å¾„è§„åˆ’ä¸ºé€‰æ‹©è·ç¦»æœ€è¿‘çš„çƒè¿”å›
-			//ä¸ä½¿ç”¨ä¸²å£
-			//cartesian_to_polar(max_r_x, max_radius, centre_x, s, theta);
+			//ÈôÂ·¾¶¹æ»®ÎªÑ¡Ôñ¾àÀë×î½üµÄÇò·µ»Ø
+			cartesian_to_polar(max_r_x, max_radius, centre_x, s, theta);
 		}
 
 
@@ -223,16 +219,15 @@ int main(int argc, const char** argv)
 				tennis = true;
 				x = rx + roi_x;
 				cout << "FitEllipse:" << "radius=" << radius << ",x=" << x << endl;
-				//ä¸ä½¿ç”¨ä¸²å£
-				//cartesian_to_polar(x, radius, centre_x, theta, s);
+				cartesian_to_polar(x, radius, centre_x, theta, s);
 			}
 		}
-		
-		
 		/************************************ OUTPUT ****************************************/
-		// polar_buff(tennis, send_buf, s, theta);
-		// mySerialPort.WriteData(send_buf, 10);
-		// tennis = false;
+
+
+		polar_buff(tennis, send_buf, s, theta);
+		mySerialPort.WriteData(send_buf, 10);
+		tennis = false;
 
 
 		cv::namedWindow("roi", cv::WINDOW_KEEPRATIO);

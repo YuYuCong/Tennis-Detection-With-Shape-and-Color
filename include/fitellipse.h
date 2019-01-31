@@ -1,13 +1,13 @@
 #ifndef FILTER_ELLIPSE
 #define FILTER_ELLIPSE
 
-// INCLUDEd
-#include "include_all.h"
+// INCLUDE
+#include"include_all.h"
 
 
 // GLOBAL VARIABLES
 
-const bool fitEllipseQ = 0;
+const bool fitEllipseQ = false;
 const bool fitEllipseAMSQ = false;
 const bool fitEllipseDirectQ = false;
 

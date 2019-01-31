@@ -1,20 +1,37 @@
 //////////////////////////////////////////////////////////////////////////  
+
 /// COPYRIGHT NOTICE  
-/// Copyright (c) 2009, åä¸­ç§‘æŠ€å¤§å­¦tickTick Group  ï¼ˆç‰ˆæƒå£°æ˜ï¼‰  
+
+/// Copyright (c) 2009, »ªÖĞ¿Æ¼¼´óÑ§tickTick Group  £¨°æÈ¨ÉùÃ÷£©  
+
 /// All rights reserved.  
+
 ///   
+
 /// @file    SerialPort.cpp    
-/// @brief   ä¸²å£é€šä¿¡ç±»çš„å®ç°æ–‡ä»¶  
+
+/// @brief   ´®¿ÚÍ¨ĞÅÀàµÄÊµÏÖÎÄ¼ş  
+
 ///  
-/// æœ¬æ–‡ä»¶ä¸ºä¸²å£é€šä¿¡ç±»çš„å®ç°ä»£ç   
+
+/// ±¾ÎÄ¼şÎª´®¿ÚÍ¨ĞÅÀàµÄÊµÏÖ´úÂë  
+
 ///  
+
 /// @version 1.0     
-/// @author  å¢ä¿Š    
-/// @E-mailï¼šlujun.hust@gmail.com  
+
+/// @author  Â¬¿¡    
+
+/// @E-mail£ºlujun.hust@gmail.com  
+
 /// @date    2010/03/19  
+
 ///   
+
 ///  
-///  ä¿®è®¢è¯´æ˜ï¼š  
+
+///  ĞŞ¶©ËµÃ÷£º  
+
 //////////////////////////////////////////////////////////////////////////  
 
 
@@ -29,11 +46,11 @@
 
 
 
-/** çº¿ç¨‹é€€å‡ºæ ‡å¿— */
+/** Ïß³ÌÍË³ö±êÖ¾ */
 
 bool CSerialPort::s_bExit = false;
 
-/** å½“ä¸²å£æ— æ•°æ®æ—¶,sleepè‡³ä¸‹æ¬¡æŸ¥è¯¢é—´éš”çš„æ—¶é—´,å•ä½:ç§’ */
+/** µ±´®¿ÚÎŞÊı¾İÊ±,sleepÖÁÏÂ´Î²éÑ¯¼ä¸ôµÄÊ±¼ä,µ¥Î»:Ãë */
 
 const UINT SLEEP_TIME_INTERVAL = 5;
 
@@ -81,7 +98,7 @@ bool CSerialPort::InitPort(UINT portNo /*= 1*/, UINT baud /*= CBR_9600*/, char p
 
 
 
-	/** ä¸´æ—¶å˜é‡,å°†åˆ¶å®šå‚æ•°è½¬åŒ–ä¸ºå­—ç¬¦ä¸²å½¢å¼,ä»¥æ„é€ DCBç»“æ„ */
+	/** ÁÙÊ±±äÁ¿,½«ÖÆ¶¨²ÎÊı×ª»¯Îª×Ö·û´®ĞÎÊ½,ÒÔ¹¹ÔìDCB½á¹¹ */
 
 	char szDCBparam[50];
 
@@ -89,7 +106,7 @@ bool CSerialPort::InitPort(UINT portNo /*= 1*/, UINT baud /*= CBR_9600*/, char p
 
 
 
-	/** æ‰“å¼€æŒ‡å®šä¸²å£,è¯¥å‡½æ•°å†…éƒ¨å·²ç»æœ‰ä¸´ç•ŒåŒºä¿æŠ¤,ä¸Šé¢è¯·ä¸è¦åŠ ä¿æŠ¤ */
+	/** ´ò¿ªÖ¸¶¨´®¿Ú,¸Ãº¯ÊıÄÚ²¿ÒÑ¾­ÓĞÁÙ½çÇø±£»¤,ÉÏÃæÇë²»Òª¼Ó±£»¤ */
 
 	if (!openPort(portNo))
 
@@ -101,21 +118,21 @@ bool CSerialPort::InitPort(UINT portNo /*= 1*/, UINT baud /*= CBR_9600*/, char p
 
 
 
-	/** è¿›å…¥ä¸´ç•Œæ®µ */
+	/** ½øÈëÁÙ½ç¶Î */
 
 	EnterCriticalSection(&m_csCommunicationSync);
 
 
 
-	/** æ˜¯å¦æœ‰é”™è¯¯å‘ç”Ÿ */
+	/** ÊÇ·ñÓĞ´íÎó·¢Éú */
 
 	BOOL bIsSuccess = TRUE;
 
 
 
-	/** åœ¨æ­¤å¯ä»¥è®¾ç½®è¾“å…¥è¾“å‡ºçš„ç¼“å†²åŒºå¤§å°,å¦‚æœä¸è®¾ç½®,åˆ™ç³»ç»Ÿä¼šè®¾ç½®é»˜è®¤å€¼.
+	/** ÔÚ´Ë¿ÉÒÔÉèÖÃÊäÈëÊä³öµÄ»º³åÇø´óĞ¡,Èç¹û²»ÉèÖÃ,ÔòÏµÍ³»áÉèÖÃÄ¬ÈÏÖµ.
 
-	*  è‡ªå·±è®¾ç½®ç¼“å†²åŒºå¤§å°æ—¶,è¦æ³¨æ„è®¾ç½®ç¨å¤§ä¸€äº›,é¿å…ç¼“å†²åŒºæº¢å‡º
+	*  ×Ô¼ºÉèÖÃ»º³åÇø´óĞ¡Ê±,Òª×¢ÒâÉèÖÃÉÔ´óÒ»Ğ©,±ÜÃâ»º³åÇøÒç³ö
 
 	*/
 
@@ -129,7 +146,7 @@ bool CSerialPort::InitPort(UINT portNo /*= 1*/, UINT baud /*= CBR_9600*/, char p
 
 
 
-	/** è®¾ç½®ä¸²å£çš„è¶…æ—¶æ—¶é—´,å‡è®¾ä¸º0,è¡¨ç¤ºä¸ä½¿ç”¨è¶…æ—¶é™åˆ¶ */
+	/** ÉèÖÃ´®¿ÚµÄ³¬Ê±Ê±¼ä,¾ùÉèÎª0,±íÊ¾²»Ê¹ÓÃ³¬Ê±ÏŞÖÆ */
 
 	COMMTIMEOUTS  CommTimeouts;
 
@@ -159,7 +176,7 @@ bool CSerialPort::InitPort(UINT portNo /*= 1*/, UINT baud /*= CBR_9600*/, char p
 
 	{
 
-		// å°†ANSIå­—ç¬¦ä¸²è½¬æ¢ä¸ºUNICODEå­—ç¬¦ä¸²  
+		// ½«ANSI×Ö·û´®×ª»»ÎªUNICODE×Ö·û´®  
 
 		DWORD dwNum = MultiByteToWideChar(CP_ACP, 0, szDCBparam, -1, NULL, 0);
 
@@ -175,17 +192,17 @@ bool CSerialPort::InitPort(UINT portNo /*= 1*/, UINT baud /*= CBR_9600*/, char p
 
 
 
-		/** è·å–å½“å‰ä¸²å£é…ç½®å‚æ•°,å¹¶ä¸”æ„é€ ä¸²å£DCBå‚æ•° */
+		/** »ñÈ¡µ±Ç°´®¿ÚÅäÖÃ²ÎÊı,²¢ÇÒ¹¹Ôì´®¿ÚDCB²ÎÊı */
 
 		bIsSuccess = GetCommState(m_hComm, &dcb) && BuildCommDCB(pwText, &dcb);
 
-		/** å¼€å¯RTS flowæ§åˆ¶ */
+		/** ¿ªÆôRTS flow¿ØÖÆ */
 
 		dcb.fRtsControl = RTS_CONTROL_ENABLE;
 
 
 
-		/** é‡Šæ”¾å†…å­˜ç©ºé—´ */
+		/** ÊÍ·ÅÄÚ´æ¿Õ¼ä */
 
 		delete[] pwText;
 
@@ -197,7 +214,7 @@ bool CSerialPort::InitPort(UINT portNo /*= 1*/, UINT baud /*= CBR_9600*/, char p
 
 	{
 
-		/** ä½¿ç”¨DCBå‚æ•°é…ç½®ä¸²å£çŠ¶æ€ */
+		/** Ê¹ÓÃDCB²ÎÊıÅäÖÃ´®¿Ú×´Ì¬ */
 
 		bIsSuccess = SetCommState(m_hComm, &dcb);
 
@@ -205,13 +222,13 @@ bool CSerialPort::InitPort(UINT portNo /*= 1*/, UINT baud /*= CBR_9600*/, char p
 
 
 
-	/**  æ¸…ç©ºä¸²å£ç¼“å†²åŒº */
+	/**  Çå¿Õ´®¿Ú»º³åÇø */
 
 	PurgeComm(m_hComm, PURGE_RXCLEAR | PURGE_TXCLEAR | PURGE_RXABORT | PURGE_TXABORT);
 
 
 
-	/** ç¦»å¼€ä¸´ç•Œæ®µ */
+	/** Àë¿ªÁÙ½ç¶Î */
 
 	LeaveCriticalSection(&m_csCommunicationSync);
 
@@ -227,7 +244,7 @@ bool CSerialPort::InitPort(UINT portNo, const LPDCB& plDCB)
 
 {
 
-	/** æ‰“å¼€æŒ‡å®šä¸²å£,è¯¥å‡½æ•°å†…éƒ¨å·²ç»æœ‰ä¸´ç•ŒåŒºä¿æŠ¤,ä¸Šé¢è¯·ä¸è¦åŠ ä¿æŠ¤ */
+	/** ´ò¿ªÖ¸¶¨´®¿Ú,¸Ãº¯ÊıÄÚ²¿ÒÑ¾­ÓĞÁÙ½çÇø±£»¤,ÉÏÃæÇë²»Òª¼Ó±£»¤ */
 
 	if (!openPort(portNo))
 
@@ -239,13 +256,13 @@ bool CSerialPort::InitPort(UINT portNo, const LPDCB& plDCB)
 
 
 
-	/** è¿›å…¥ä¸´ç•Œæ®µ */
+	/** ½øÈëÁÙ½ç¶Î */
 
 	EnterCriticalSection(&m_csCommunicationSync);
 
 
 
-	/** é…ç½®ä¸²å£å‚æ•° */
+	/** ÅäÖÃ´®¿Ú²ÎÊı */
 
 	if (!SetCommState(m_hComm, plDCB))
 
@@ -257,13 +274,13 @@ bool CSerialPort::InitPort(UINT portNo, const LPDCB& plDCB)
 
 
 
-	/**  æ¸…ç©ºä¸²å£ç¼“å†²åŒº */
+	/**  Çå¿Õ´®¿Ú»º³åÇø */
 
 	PurgeComm(m_hComm, PURGE_RXCLEAR | PURGE_TXCLEAR | PURGE_RXABORT | PURGE_TXABORT);
 
 
 
-	/** ç¦»å¼€ä¸´ç•Œæ®µ */
+	/** Àë¿ªÁÙ½ç¶Î */
 
 	LeaveCriticalSection(&m_csCommunicationSync);
 
@@ -279,7 +296,7 @@ void CSerialPort::ClosePort()
 
 {
 
-	/** å¦‚æœæœ‰ä¸²å£è¢«æ‰“å¼€ï¼Œå…³é—­å®ƒ */
+	/** Èç¹ûÓĞ´®¿Ú±»´ò¿ª£¬¹Ø±ÕËü */
 
 	if (m_hComm != INVALID_HANDLE_VALUE)
 
@@ -299,13 +316,13 @@ bool CSerialPort::openPort(UINT portNo)
 
 {
 
-	/** è¿›å…¥ä¸´ç•Œæ®µ */
+	/** ½øÈëÁÙ½ç¶Î */
 
 	EnterCriticalSection(&m_csCommunicationSync);
 
 
 
-	/** æŠŠä¸²å£çš„ç¼–å·è½¬æ¢ä¸ºè®¾å¤‡å */
+	/** °Ñ´®¿ÚµÄ±àºÅ×ª»»ÎªÉè±¸Ãû */
 
 	char szPort[50];
 
@@ -313,17 +330,17 @@ bool CSerialPort::openPort(UINT portNo)
 
 
 
-	/** æ‰“å¼€æŒ‡å®šçš„ä¸²å£ */
+	/** ´ò¿ªÖ¸¶¨µÄ´®¿Ú */
 
-	m_hComm = CreateFileA(szPort,  /** è®¾å¤‡å,COM1,COM2ç­‰ */
+	m_hComm = CreateFileA(szPort,  /** Éè±¸Ãû,COM1,COM2µÈ */
 
-		GENERIC_READ | GENERIC_WRITE, /** è®¿é—®æ¨¡å¼,å¯åŒæ—¶è¯»å†™ */
+		GENERIC_READ | GENERIC_WRITE, /** ·ÃÎÊÄ£Ê½,¿ÉÍ¬Ê±¶ÁĞ´ */
 
-		0,                            /** å…±äº«æ¨¡å¼,0è¡¨ç¤ºä¸å…±äº« */
+		0,                            /** ¹²ÏíÄ£Ê½,0±íÊ¾²»¹²Ïí */
 
-		NULL,                         /** å®‰å…¨æ€§è®¾ç½®,ä¸€èˆ¬ä½¿ç”¨NULL */
+		NULL,                         /** °²È«ĞÔÉèÖÃ,Ò»°ãÊ¹ÓÃNULL */
 
-		OPEN_EXISTING,                /** è¯¥å‚æ•°è¡¨ç¤ºè®¾å¤‡å¿…é¡»å­˜åœ¨,å¦åˆ™åˆ›å»ºå¤±è´¥ */
+		OPEN_EXISTING,                /** ¸Ã²ÎÊı±íÊ¾Éè±¸±ØĞë´æÔÚ,·ñÔò´´½¨Ê§°Ü */
 
 		0,
 
@@ -331,7 +348,7 @@ bool CSerialPort::openPort(UINT portNo)
 
 
 
-	/** å¦‚æœæ‰“å¼€å¤±è´¥ï¼Œé‡Šæ”¾èµ„æºå¹¶è¿”å› */
+	/** Èç¹û´ò¿ªÊ§°Ü£¬ÊÍ·Å×ÊÔ´²¢·µ»Ø */
 
 	if (m_hComm == INVALID_HANDLE_VALUE)
 
@@ -345,7 +362,7 @@ bool CSerialPort::openPort(UINT portNo)
 
 
 
-	/** é€€å‡ºä¸´ç•ŒåŒº */
+	/** ÍË³öÁÙ½çÇø */
 
 	LeaveCriticalSection(&m_csCommunicationSync);
 
@@ -361,13 +378,13 @@ bool CSerialPort::OpenListenThread()
 
 {
 
-	/** æ£€æµ‹çº¿ç¨‹æ˜¯å¦å·²ç»å¼€å¯äº† */
+	/** ¼ì²âÏß³ÌÊÇ·ñÒÑ¾­¿ªÆôÁË */
 
 	if (m_hListenThread != INVALID_HANDLE_VALUE)
 
 	{
 
-		/** çº¿ç¨‹å·²ç»å¼€å¯ */
+		/** Ïß³ÌÒÑ¾­¿ªÆô */
 
 		return false;
 
@@ -377,11 +394,11 @@ bool CSerialPort::OpenListenThread()
 
 	s_bExit = false;
 
-	/** çº¿ç¨‹ID */
+	/** Ïß³ÌID */
 
 	UINT threadId;
 
-	/** å¼€å¯ä¸²å£æ•°æ®ç›‘å¬çº¿ç¨‹ */
+	/** ¿ªÆô´®¿ÚÊı¾İ¼àÌıÏß³Ì */
 
 	m_hListenThread = (HANDLE)_beginthreadex(NULL, 0, ListenThread, this, 0, &threadId);
 
@@ -393,7 +410,7 @@ bool CSerialPort::OpenListenThread()
 
 	}
 
-	/** è®¾ç½®çº¿ç¨‹çš„ä¼˜å…ˆçº§,é«˜äºæ™®é€šçº¿ç¨‹ */
+	/** ÉèÖÃÏß³ÌµÄÓÅÏÈ¼¶,¸ßÓÚÆÕÍ¨Ïß³Ì */
 
 	if (!SetThreadPriority(m_hListenThread, THREAD_PRIORITY_ABOVE_NORMAL))
 
@@ -419,19 +436,19 @@ bool CSerialPort::CloseListenTread()
 
 	{
 
-		/** é€šçŸ¥çº¿ç¨‹é€€å‡º */
+		/** Í¨ÖªÏß³ÌÍË³ö */
 
 		s_bExit = true;
 
 
 
-		/** ç­‰å¾…çº¿ç¨‹é€€å‡º */
+		/** µÈ´ıÏß³ÌÍË³ö */
 
 		Sleep(10);
 
 
 
-		/** ç½®çº¿ç¨‹å¥æŸ„æ— æ•ˆ */
+		/** ÖÃÏß³Ì¾ä±úÎŞĞ§ */
 
 		CloseHandle(m_hListenThread);
 
@@ -449,9 +466,9 @@ UINT CSerialPort::GetBytesInCOM()
 
 {
 
-	DWORD dwError = 0;  /** é”™è¯¯ç  */
+	DWORD dwError = 0;  /** ´íÎóÂë */
 
-	COMSTAT  comstat;   /** COMSTATç»“æ„ä½“,è®°å½•é€šä¿¡è®¾å¤‡çš„çŠ¶æ€ä¿¡æ¯ */
+	COMSTAT  comstat;   /** COMSTAT½á¹¹Ìå,¼ÇÂ¼Í¨ĞÅÉè±¸µÄ×´Ì¬ĞÅÏ¢ */
 
 	memset(&comstat, 0, sizeof(COMSTAT));
 
@@ -459,13 +476,13 @@ UINT CSerialPort::GetBytesInCOM()
 
 	UINT BytesInQue = 0;
 
-	/** åœ¨è°ƒç”¨ReadFileå’ŒWriteFileä¹‹å‰,é€šè¿‡æœ¬å‡½æ•°æ¸…é™¤ä»¥å‰é—ç•™çš„é”™è¯¯æ ‡å¿— */
+	/** ÔÚµ÷ÓÃReadFileºÍWriteFileÖ®Ç°,Í¨¹ı±¾º¯ÊıÇå³ıÒÔÇ°ÒÅÁôµÄ´íÎó±êÖ¾ */
 
 	if (ClearCommError(m_hComm, &dwError, &comstat))
 
 	{
 
-		BytesInQue = comstat.cbInQue; /** è·å–åœ¨è¾“å…¥ç¼“å†²åŒºä¸­çš„å­—èŠ‚æ•° */
+		BytesInQue = comstat.cbInQue; /** »ñÈ¡ÔÚÊäÈë»º³åÇøÖĞµÄ×Ö½ÚÊı */
 
 	}
 
@@ -481,13 +498,13 @@ UINT WINAPI CSerialPort::ListenThread(void* pParam)
 
 {
 
-	/** å¾—åˆ°æœ¬ç±»çš„æŒ‡é’ˆ */
+	/** µÃµ½±¾ÀàµÄÖ¸Õë */
 
 	CSerialPort *pSerialPort = reinterpret_cast<CSerialPort*>(pParam);
 
 
 
-	// çº¿ç¨‹å¾ªç¯,è½®è¯¢æ–¹å¼è¯»å–ä¸²å£æ•°æ®  
+	// Ïß³ÌÑ­»·,ÂÖÑ¯·½Ê½¶ÁÈ¡´®¿ÚÊı¾İ  
 
 	while (!pSerialPort->s_bExit)
 
@@ -495,7 +512,7 @@ UINT WINAPI CSerialPort::ListenThread(void* pParam)
 
 		UINT BytesInQue = pSerialPort->GetBytesInCOM();
 
-		/** å¦‚æœä¸²å£è¾“å…¥ç¼“å†²åŒºä¸­æ— æ•°æ®,åˆ™ä¼‘æ¯ä¸€ä¼šå†æŸ¥è¯¢ */
+		/** Èç¹û´®¿ÚÊäÈë»º³åÇøÖĞÎŞÊı¾İ,ÔòĞİÏ¢Ò»»áÔÙ²éÑ¯ */
 
 		if (BytesInQue == 0)
 
@@ -509,7 +526,7 @@ UINT WINAPI CSerialPort::ListenThread(void* pParam)
 
 
 
-		/** è¯»å–è¾“å…¥ç¼“å†²åŒºä¸­çš„æ•°æ®å¹¶è¾“å‡ºæ˜¾ç¤º */
+		/** ¶ÁÈ¡ÊäÈë»º³åÇøÖĞµÄÊı¾İ²¢Êä³öÏÔÊ¾ */
 
 		char cRecved = 0x00;
 
@@ -559,13 +576,13 @@ bool CSerialPort::ReadChar(char &cRecved)
 
 
 
-	/** ä¸´ç•ŒåŒºä¿æŠ¤ */
+	/** ÁÙ½çÇø±£»¤ */
 
 	EnterCriticalSection(&m_csCommunicationSync);
 
 
 
-	/** ä»ç¼“å†²åŒºè¯»å–ä¸€ä¸ªå­—èŠ‚çš„æ•°æ® */
+	/** ´Ó»º³åÇø¶ÁÈ¡Ò»¸ö×Ö½ÚµÄÊı¾İ */
 
 	bResult = ReadFile(m_hComm, &cRecved, 1, &BytesRead, NULL);
 
@@ -573,13 +590,13 @@ bool CSerialPort::ReadChar(char &cRecved)
 
 	{
 
-		/** è·å–é”™è¯¯ç ,å¯ä»¥æ ¹æ®è¯¥é”™è¯¯ç æŸ¥å‡ºé”™è¯¯åŸå›  */
+		/** »ñÈ¡´íÎóÂë,¿ÉÒÔ¸ù¾İ¸Ã´íÎóÂë²é³ö´íÎóÔ­Òò */
 
 		DWORD dwError = GetLastError();
 
 
 
-		/** æ¸…ç©ºä¸²å£ç¼“å†²åŒº */
+		/** Çå¿Õ´®¿Ú»º³åÇø */
 
 		PurgeComm(m_hComm, PURGE_RXCLEAR | PURGE_RXABORT);
 
@@ -593,7 +610,7 @@ bool CSerialPort::ReadChar(char &cRecved)
 
 
 
-	/** ç¦»å¼€ä¸´ç•ŒåŒº */
+	/** Àë¿ªÁÙ½çÇø */
 
 	LeaveCriticalSection(&m_csCommunicationSync);
 
@@ -625,13 +642,13 @@ bool CSerialPort::WriteData(unsigned char* pData, unsigned int length)
 
 
 
-	/** ä¸´ç•ŒåŒºä¿æŠ¤ */
+	/** ÁÙ½çÇø±£»¤ */
 
 	EnterCriticalSection(&m_csCommunicationSync);
 
 
 
-	/** å‘ç¼“å†²åŒºå†™å…¥æŒ‡å®šé‡çš„æ•°æ® */
+	/** Ïò»º³åÇøĞ´ÈëÖ¸¶¨Á¿µÄÊı¾İ */
 
 	bResult = WriteFile(m_hComm, pData, length, &BytesToSend, NULL);
 
@@ -641,7 +658,7 @@ bool CSerialPort::WriteData(unsigned char* pData, unsigned int length)
 
 		DWORD dwError = GetLastError();
 
-		/** æ¸…ç©ºä¸²å£ç¼“å†²åŒº */
+		/** Çå¿Õ´®¿Ú»º³åÇø */
 
 		PurgeComm(m_hComm, PURGE_RXCLEAR | PURGE_RXABORT);
 
@@ -655,7 +672,7 @@ bool CSerialPort::WriteData(unsigned char* pData, unsigned int length)
 
 
 
-	/** ç¦»å¼€ä¸´ç•ŒåŒº */
+	/** Àë¿ªÁÙ½çÇø */
 
 	LeaveCriticalSection(&m_csCommunicationSync);
 

@@ -1,15 +1,15 @@
-#include "include_all.h"
+#include"include_all.h"
 
 /**
  * @function filter
  * @author Sunnie CYQ
- * @brief  åæ ‡è½¬æ¢ï¼Œå¾—åˆ°æåæ ‡
+ * @brief  ×ø±ê×ª»»£¬µÃµ½¼«×ø±ê
  */
 
 void cartesian_to_polar(double x, int radius, double centre_x, double &s, double &theta)
 {
-	double d = 0;                        //æ‘„åƒæœºä¸ç½‘çƒçš„è·ç¦»ï¼Œå•ä½m
-	double dx = 0;                      //æœºå™¨äººç¬›å¡å°”åæ ‡ç³»ä¸‹ï¼Œç½‘çƒä¸­å¿ƒåç¦»å°è½¦ä¸­å¿ƒçš„è·ç¦»
+	double d = 0;                        //ÉãÏñ»úÓëÍøÇòµÄ¾àÀë£¬µ¥Î»m
+	double dx = 0;                      //»úÆ÷ÈËµÑ¿¨¶û×ø±êÏµÏÂ£¬ÍøÇòÖĞĞÄÆ«ÀëĞ¡³µÖĞĞÄµÄ¾àÀë
 	
 	if (radius)
 	{
@@ -29,6 +29,6 @@ void cartesian_to_polar(double x, int radius, double centre_x, double &s, double
 	}
 	
 	//cout << "dx =" << dx << "m, d =" << d << "m, s =" << s << "m" << endl;
-	//cout << "theta=" << theta << "=" << theta * 180 / pii << "åº¦" << endl << endl;
+	//cout << "theta=" << theta << "=" << theta * 180 / pii << "¶È" << endl << endl;
 
 }

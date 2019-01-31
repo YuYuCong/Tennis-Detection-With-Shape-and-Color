@@ -1,317 +1,317 @@
-// //////////////////////////////////////////////////////////////////////////  
+//////////////////////////////////////////////////////////////////////////  
 
-// /// COPYRIGHT NOTICE  
+/// COPYRIGHT NOTICE  
 
-// /// Copyright (c) 2009, 锟斤拷锟叫科硷拷锟斤拷学tickTick Group  锟斤拷锟斤拷权锟斤拷锟斤拷锟斤拷  
+/// Copyright (c) 2009, ���пƼ���ѧtickTick Group  ����Ȩ������  
 
-// /// All rights reserved.  
+/// All rights reserved.  
 
-// ///   
+///   
 
-// /// @file    SerialPort.h    
+/// @file    SerialPort.h    
 
-// /// @brief   锟斤拷锟斤拷通锟斤拷锟斤拷头锟侥硷拷  
+/// @brief   ����ͨ����ͷ�ļ�  
 
-// ///  
+///  
 
-// /// 锟斤拷锟侥硷拷锟斤拷纱锟斤拷锟酵拷锟斤拷锟斤拷锟斤拷锟斤拷  
+/// ���ļ���ɴ���ͨ���������  
 
-// ///  
+///  
 
-// /// @version 1.0     
+/// @version 1.0     
 
-// /// @author  卢锟斤拷   
+/// @author  ¬��   
 
-// /// @E-mail锟斤拷lujun.hust@gmail.com  
+/// @E-mail��lujun.hust@gmail.com  
 
-// /// @date    2010/03/19  
+/// @date    2010/03/19  
 
-// ///  
+///  
 
-// ///  锟睫讹拷说锟斤拷锟斤拷  
+///  �޶�˵����  
 
-// //////////////////////////////////////////////////////////////////////////  
+//////////////////////////////////////////////////////////////////////////  
 
 
 
-// #ifndef SERIALPORT_H_  
+#ifndef SERIALPORT_H_  
 
-// #define SERIALPORT_H_  
+#define SERIALPORT_H_  
 
 
 
-// #include <Windows.h>  
+#include <Windows.h>  
 
 
 
-// /** 锟斤拷锟斤拷通锟斤拷锟斤拷
+/** ����ͨ����
 
-// *
+*
 
-// *  锟斤拷锟斤拷实锟斤拷锟剿对达拷锟节的伙拷锟斤拷锟斤拷锟斤拷
+*  ����ʵ���˶Դ��ڵĻ�������
 
-// *  锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟街革拷锟斤拷锟斤拷诘锟斤拷锟斤拷荨锟斤拷锟斤拷锟街革拷锟斤拷锟斤拷莸锟斤拷锟斤拷锟�
+*  �����������ָ�����ڵ����ݡ�����ָ�����ݵ�����
 
-// */
+*/
 
-// class CSerialPort
+class CSerialPort
 
-// {
+{
 
-// public:
+public:
 
-// 	CSerialPort(void);
+	CSerialPort(void);
 
-// 	~CSerialPort(void);
+	~CSerialPort(void);
 
 
 
-// public:
+public:
 
 
 
-// 	/** 锟斤拷始锟斤拷锟斤拷锟节猴拷锟斤拷
+	/** ��ʼ�����ں���
 
-// 	*
+	*
 
-// 	*  @param:  UINT portNo 锟斤拷锟节憋拷锟�,默锟斤拷值为1,锟斤拷COM1,注锟斤拷,锟斤拷锟斤拷锟斤拷要锟斤拷锟斤拷9
+	*  @param:  UINT portNo ���ڱ��,Ĭ��ֵΪ1,��COM1,ע��,������Ҫ����9
 
-// 	*  @param:  UINT baud   锟斤拷锟斤拷锟斤拷,默锟斤拷为9600
+	*  @param:  UINT baud   ������,Ĭ��Ϊ9600
 
-// 	*  @param:  char parity 锟角凤拷锟斤拷锟斤拷锟脚夹ｏ拷锟�,'Y'锟斤拷示锟斤拷要锟斤拷偶校锟斤拷,'N'锟斤拷示锟斤拷锟斤拷要锟斤拷偶校锟斤拷
+	*  @param:  char parity �Ƿ������żУ��,'Y'��ʾ��Ҫ��żУ��,'N'��ʾ����Ҫ��żУ��
 
-// 	*  @param:  UINT databits 锟斤拷锟斤拷位锟侥革拷锟斤拷,默锟斤拷值为8锟斤拷锟斤拷锟斤拷位
+	*  @param:  UINT databits ����λ�ĸ���,Ĭ��ֵΪ8������λ
 
-// 	*  @param:  UINT stopsbits 停止位使锟矫革拷式,默锟斤拷值为1
+	*  @param:  UINT stopsbits ֹͣλʹ�ø�ʽ,Ĭ��ֵΪ1
 
-// 	*  @param:  DWORD dwCommEvents 默锟斤拷为EV_RXCHAR,锟斤拷只要锟秸凤拷锟斤拷锟斤拷一锟斤拷锟街凤拷,锟斤拷锟斤拷锟揭伙拷锟斤拷录锟�
+	*  @param:  DWORD dwCommEvents Ĭ��ΪEV_RXCHAR,��ֻҪ�շ�����һ���ַ�,�����һ���¼�
 
-// 	*  @return: bool  锟斤拷始锟斤拷锟角凤拷晒锟�
+	*  @return: bool  ��ʼ���Ƿ�ɹ�
 
-// 	*  @note:   锟斤拷使锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟结供锟侥猴拷锟斤拷前,锟斤拷锟饺碉拷锟矫憋拷锟斤拷锟斤拷锟斤拷锟叫达拷锟节的筹拷始锟斤拷
+	*  @note:   ��ʹ�����������ṩ�ĺ���ǰ,���ȵ��ñ��������д��ڵĳ�ʼ��
 
-// 	*锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷   /n锟斤拷锟斤拷锟斤拷锟结供锟斤拷一些锟斤拷锟矫的达拷锟节诧拷锟斤拷锟斤拷锟斤拷,锟斤拷锟斤拷要锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷细锟斤拷DCB锟斤拷锟斤拷,锟斤拷使锟斤拷锟斤拷锟截猴拷锟斤拷
+	*����������   /n�������ṩ��һЩ���õĴ��ڲ�������,����Ҫ����������ϸ��DCB����,��ʹ�����غ���
 
-// 	*           /n锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷时锟斤拷锟皆讹拷锟截闭达拷锟斤拷,锟斤拷锟斤拷锟斤拷锟街达拷泄乇沾锟斤拷锟�
+	*           /n������������ʱ���Զ��رմ���,�������ִ�йرմ���
 
-// 	*  @see:
+	*  @see:
 
-// 	*/
+	*/
 
-// 	bool InitPort(UINT  portNo = 1, UINT  baud = CBR_9600, char  parity = 'N', UINT  databits = 8, UINT  stopsbits = 1, DWORD dwCommEvents = EV_RXCHAR);
+	bool InitPort(UINT  portNo = 1, UINT  baud = CBR_9600, char  parity = 'N', UINT  databits = 8, UINT  stopsbits = 1, DWORD dwCommEvents = EV_RXCHAR);
 
 
 
-// 	/** 锟斤拷锟节筹拷始锟斤拷锟斤拷锟斤拷
+	/** ���ڳ�ʼ������
 
-// 	*
+	*
 
-// 	*  锟斤拷锟斤拷锟斤拷锟结供直锟接革拷锟斤拷DCB锟斤拷锟斤拷锟斤拷锟矫达拷锟节诧拷锟斤拷
+	*  �������ṩֱ�Ӹ���DCB�������ô��ڲ���
 
-// 	*  @param:  UINT portNo
+	*  @param:  UINT portNo
 
-// 	*  @param:  const LPDCB & plDCB
+	*  @param:  const LPDCB & plDCB
 
-// 	*  @return: bool  锟斤拷始锟斤拷锟角凤拷晒锟�
+	*  @return: bool  ��ʼ���Ƿ�ɹ�
 
-// 	*  @note:   锟斤拷锟斤拷锟斤拷锟结供锟矫伙拷锟皆讹拷锟斤拷卮锟斤拷诔锟绞硷拷锟斤拷锟斤拷锟�
+	*  @note:   �������ṩ�û��Զ���ش��ڳ�ʼ������
 
-// 	*  @see:
+	*  @see:
 
-// 	*/
+	*/
 
-// 	bool InitPort(UINT  portNo, const LPDCB& plDCB);
+	bool InitPort(UINT  portNo, const LPDCB& plDCB);
 
 
 
-// 	/** 锟斤拷锟斤拷锟斤拷锟斤拷叱锟�
+	/** ���������߳�
 
-// 	*
+	*
 
-// 	*  锟斤拷锟斤拷锟斤拷锟竭筹拷锟斤拷啥源锟斤拷锟斤拷锟斤拷莸募锟斤拷锟�,锟斤拷锟斤拷锟斤拷锟秸碉拷锟斤拷锟斤拷锟捷达拷印锟斤拷锟斤拷幕锟斤拷锟�
+	*  �������߳���ɶԴ������ݵļ���,�������յ������ݴ�ӡ����Ļ���
 
-// 	*  @return: bool  锟斤拷锟斤拷锟角凤拷晒锟�
+	*  @return: bool  �����Ƿ�ɹ�
 
-// 	*  @note:   锟斤拷锟竭筹拷锟窖撅拷锟斤拷锟节匡拷锟斤拷状态时,锟斤拷锟斤拷flase
+	*  @note:   ���߳��Ѿ����ڿ���״̬ʱ,����flase
 
-// 	*  @see:
+	*  @see:
 
-// 	*/
+	*/
 
-// 	bool OpenListenThread();
+	bool OpenListenThread();
 
 
 
-// 	/** 锟截闭硷拷锟斤拷锟竭筹拷
+	/** �رռ����߳�
 
-// 	*
+	*
 
-// 	*
+	*
 
-// 	*  @return: bool  锟斤拷锟斤拷锟角凤拷晒锟�
+	*  @return: bool  �����Ƿ�ɹ�
 
-// 	*  @note:   锟斤拷锟矫憋拷锟斤拷锟斤拷锟斤拷,锟斤拷锟斤拷锟斤拷锟节碉拷锟竭程斤拷锟结被锟截憋拷
+	*  @note:   ���ñ�������,�������ڵ��߳̽��ᱻ�ر�
 
-// 	*  @see:
+	*  @see:
 
-// 	*/
+	*/
 
-// 	bool CloseListenTread();
+	bool CloseListenTread();
 
 
 
-// 	/** 锟津串匡拷写锟斤拷锟斤拷
+	/** �򴮿�д����
 
-// 	*
+	*
 
-// 	*  锟斤拷锟斤拷锟斤拷锟斤拷锟叫碉拷锟斤拷锟斤拷写锟诫到锟斤拷锟斤拷
+	*  ���������е�����д�뵽����
 
-// 	*  @param:  unsigned char * pData 指锟斤拷锟斤拷要写锟诫串锟节碉拷锟斤拷锟捷伙拷锟斤拷锟斤拷
+	*  @param:  unsigned char * pData ָ����Ҫд�봮�ڵ����ݻ�����
 
-// 	*  @param:  unsigned int length 锟斤拷要写锟斤拷锟斤拷锟斤拷莩锟斤拷锟�
+	*  @param:  unsigned int length ��Ҫд������ݳ���
 
-// 	*  @return: bool  锟斤拷锟斤拷锟角凤拷晒锟�
+	*  @return: bool  �����Ƿ�ɹ�
 
-// 	*  @note:   length锟斤拷要锟斤拷锟斤拷pData锟斤拷指锟津缓筹拷锟斤拷锟侥达拷小
+	*  @note:   length��Ҫ����pData��ָ�򻺳����Ĵ�С
 
-// 	*  @see:
+	*  @see:
 
-// 	*/
+	*/
 
-// 	bool WriteData(unsigned char* pData, unsigned int length);
+	bool WriteData(unsigned char* pData, unsigned int length);
 
 
 
-// 	/** 锟斤拷取锟斤拷锟节伙拷锟斤拷锟斤拷锟叫碉拷锟街斤拷锟斤拷
+	/** ��ȡ���ڻ������е��ֽ���
 
-// 	*
+	*
 
-// 	*
+	*
 
-// 	*  @return: UINT  锟斤拷锟斤拷锟角凤拷晒锟�
+	*  @return: UINT  �����Ƿ�ɹ�
 
-// 	*  @note:   锟斤拷锟斤拷锟节伙拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷时,锟斤拷锟斤拷0
+	*  @note:   �����ڻ�������������ʱ,����0
 
-// 	*  @see:
+	*  @see:
 
-// 	*/
+	*/
 
-// 	UINT GetBytesInCOM();
+	UINT GetBytesInCOM();
 
 
 
-// 	/** 锟斤拷取锟斤拷锟节斤拷锟秸伙拷锟斤拷锟斤拷锟斤拷一锟斤拷锟街节碉拷锟斤拷锟斤拷
+	/** ��ȡ���ڽ��ջ�������һ���ֽڵ�����
 
-// 	*
+	*
 
-// 	*
+	*
 
-// 	*  @param:  char & cRecved 锟斤拷哦锟饺★拷锟斤拷莸锟斤拷址锟斤拷锟斤拷锟�
+	*  @param:  char & cRecved ��Ŷ�ȡ���ݵ��ַ�����
 
-// 	*  @return: bool  锟斤拷取锟角凤拷晒锟�
+	*  @return: bool  ��ȡ�Ƿ�ɹ�
 
-// 	*  @note:
+	*  @note:
 
-// 	*  @see:
+	*  @see:
 
-// 	*/
+	*/
 
-// 	bool ReadChar(char &cRecved);
+	bool ReadChar(char &cRecved);
 
 
 
-// private:
+private:
 
 
 
-// 	/** 锟津开达拷锟斤拷
+	/** �򿪴���
 
-// 	*
+	*
 
-// 	*
+	*
 
-// 	*  @param:  UINT portNo 锟斤拷锟斤拷锟借备锟斤拷
+	*  @param:  UINT portNo �����豸��
 
-// 	*  @return: bool  锟斤拷锟角凤拷晒锟�
+	*  @return: bool  ���Ƿ�ɹ�
 
-// 	*  @note:
+	*  @note:
 
-// 	*  @see:
+	*  @see:
 
-// 	*/
+	*/
 
-// 	bool openPort(UINT  portNo);
+	bool openPort(UINT  portNo);
 
 
 
-// 	/** 锟截闭达拷锟斤拷
+	/** �رմ���
 
-// 	*
+	*
 
-// 	*
+	*
 
-// 	*  @return: void  锟斤拷锟斤拷锟角凤拷晒锟�
+	*  @return: void  �����Ƿ�ɹ�
 
-// 	*  @note:
+	*  @note:
 
-// 	*  @see:
+	*  @see:
 
-// 	*/
+	*/
 
-// 	void ClosePort();
+	void ClosePort();
 
 
 
-// 	/** 锟斤拷锟节硷拷锟斤拷锟竭筹拷
+	/** ���ڼ����߳�
 
-// 	*
+	*
 
-// 	*  锟斤拷锟斤拷锟斤拷锟皆达拷锟节碉拷锟斤拷锟捷猴拷锟斤拷息
+	*  �������Դ��ڵ����ݺ���Ϣ
 
-// 	*  @param:  void * pParam 锟竭程诧拷锟斤拷
+	*  @param:  void * pParam �̲߳���
 
-// 	*  @return: UINT WINAPI 锟竭程凤拷锟斤拷值
+	*  @return: UINT WINAPI �̷߳���ֵ
 
-// 	*  @note:
+	*  @note:
 
-// 	*  @see:
+	*  @see:
 
-// 	*/
+	*/
 
-// 	static UINT WINAPI ListenThread(void* pParam);
+	static UINT WINAPI ListenThread(void* pParam);
 
 
 
-// private:
+private:
 
 
 
-// 	/** 锟斤拷锟节撅拷锟� */
+	/** ���ھ�� */
 
-// 	HANDLE  m_hComm;
+	HANDLE  m_hComm;
 
 
 
-// 	/** 锟竭筹拷锟剿筹拷锟斤拷志锟斤拷锟斤拷 */
+	/** �߳��˳���־���� */
 
-// 	static bool s_bExit;
+	static bool s_bExit;
 
 
 
-// 	/** 锟竭程撅拷锟� */
+	/** �߳̾�� */
 
-// 	volatile HANDLE    m_hListenThread;
+	volatile HANDLE    m_hListenThread;
 
 
 
-// 	/** 同锟斤拷锟斤拷锟斤拷,锟劫斤拷锟斤拷锟斤拷锟斤拷 */
+	/** ͬ������,�ٽ������� */
 
-// 	CRITICAL_SECTION   m_csCommunicationSync;       //!< 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟�  
+	CRITICAL_SECTION   m_csCommunicationSync;       //!< �����������  
 
 
 
-// };
+};
 
 
 
-// #endif //SERIALPORT_H_ 
+#endif //SERIALPORT_H_ 
